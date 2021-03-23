@@ -38,10 +38,10 @@ public class Circle {
 
     @Override
     public String toString() {
-        return "Circle[" +
+        return "Circle{" +
                 "radius=" + radius +
                 ", color='" + color + '\'' +
-                ']';
+                '}';
     }
 
     public double getArea() {

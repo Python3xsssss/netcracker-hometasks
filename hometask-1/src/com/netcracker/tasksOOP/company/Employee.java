@@ -43,16 +43,16 @@ public class Employee {
     }
 
     public int raiseSalary(int percent) {
-        salary = salary * (int)(1 + percent / 100.0f);
+        salary = (int)(salary * (1 + percent / 100.0f));
         return salary;
     }
 
     @Override
     public String toString() {
-        return "Employee[" +
+        return "Employee{" +
                 "id=" + id +
                 ", name='" + firstName + ' ' + lastName + '\'' +
                 ", salary=" + salary +
-                ']';
+                '}';
     }
 }

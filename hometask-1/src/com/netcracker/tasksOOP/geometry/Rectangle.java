@@ -40,9 +40,9 @@ public class Rectangle {
 
     @Override
     public String toString() {
-        return "Rectangle[" +
+        return "Rectangle{" +
                 "length=" + length +
                 ", width=" + width +
-                ']';
+                '}';
     }
 }
