@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>App for quadratic equations</title>
+    <meta name="author" content="Mikhail Gerasimov">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="imgblock">
+        <img src="images/background_large.png" alt="Blackboard">
+        <span>
+            <h1> Solve your quadratic equation! </h1>
+        </span>
+
+        <div id="addRow">
+            <span> Enter the equation:
+                <input type="number" name="A" id="A" value="1" size="3" />
+                X<sup>2</sup> +
+                <input type="number" name="B" id="B" value="2" size="3" />
+                X +
+                <input type="number" name="C" id="C" value="1" size="3" />
+                = 0
+
+                <input type="button" name="solve" id="solvebut" value="Solve the equation!" />
+            </span>
+        </div>
+
+        <div id="scroll-table">
+            <table id="table">
+                <caption> Your equations </caption>
+                <thead>
+                    <tr>
+                        <th>Equation</th>
+                        <th>x1</th>
+                        <th>x2</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="script/script.js"></script>
+</body>
+
+</html>
