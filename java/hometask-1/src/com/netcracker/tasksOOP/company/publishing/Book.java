@@ -12,8 +12,6 @@ public class Book {
         public Author() {
         }
 
-
-
         public Author(String name, String email, char gender) {
             this.name = name;
             this.email = email;
@@ -27,14 +25,12 @@ public class Book {
         @Override
         protected Object clone() {
             Author author = null;
-            try {
-                author = (Author) super.clone();
-            } catch (CloneNotSupportedException e) {
-                author = new Author(
-                        this.getName(), this.getEmail(), this.getGender());
-            }
+            author = new Author(
+                    this.getName(), this.getEmail(), this.getGender());
+
             return author;
         }
+
 
         @Override
         public String toString() {
@@ -78,7 +74,9 @@ public class Book {
     public Book(String name, Author[] authors, double price) {
         this.name = name;
         this.authors = new Author[authors.length];
-        this.authors = authors.clone(); // Arrays.copyOf(authors, authors.length);
+        for (int i = 0; i < authors.length; i++) { // authors.clone(); // Arrays.copyOf(authors, authors.length);
+            this.authors[i] = new Author(authors[i]); // c++ style
+        }
         this.price = price;
     }
 
