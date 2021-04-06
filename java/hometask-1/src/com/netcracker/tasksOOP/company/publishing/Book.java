@@ -12,10 +12,28 @@ public class Book {
         public Author() {
         }
 
+
+
         public Author(String name, String email, char gender) {
             this.name = name;
             this.email = email;
             this.gender = gender;
+        }
+
+        public Author(Author another) {
+            this(another.getName(), another.getEmail(), another.getGender());
+        }
+
+        @Override
+        protected Object clone() {
+            Author author = null;
+            try {
+                author = (Author) super.clone();
+            } catch (CloneNotSupportedException e) {
+                author = new Author(
+                        this.getName(), this.getEmail(), this.getGender());
+            }
+            return author;
         }
 
         @Override
@@ -26,6 +44,30 @@ public class Book {
                     ", gender=" + gender +
                     '}';
         }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        public char getGender() {
+            return gender;
+        }
+
+        public void setGender(char gender) {
+            this.gender = gender;
+        }
     }
 
     private String name;
@@ -35,14 +77,13 @@ public class Book {
 
     public Book(String name, Author[] authors, double price) {
         this.name = name;
-        this.authors = authors;
+        this.authors = new Author[authors.length];
+        this.authors = authors.clone(); // Arrays.copyOf(authors, authors.length);
         this.price = price;
     }
 
     public Book(String name, Author[] authors, double price, int qty) {
-        this.name = name;
-        this.authors = authors;
-        this.price = price;
+        this(name, authors, price);
         this.qty = qty;
     }
 
