@@ -20,21 +20,21 @@ public class MyPolynomial {
 
     @Override
     public String toString() {
-        String out = "";
+        StringBuilder out = new StringBuilder();
 
         for (int i = coeffs.length - 1; i >= 0; i--) {
             if (coeffs[i] != 0) {
                 if (out.length() == 0) {
-                    out += ((coeffs[i] < 0) ? "- " : "");
+                    out.append((coeffs[i] < 0) ? "- " : "");
                 } else {
-                    out += ((coeffs[i] < 0) ? "- " : "+ ");
+                    out.append((coeffs[i] < 0) ? "- " : "+ ");
                 }
-                out += abs(coeffs[i]) + ((i == 0) ? "" : "*x") + ((i <= 1) ? " " : "^" + i + " ");
+                out.append(abs(coeffs[i])).append((i == 0) ? "" : "*x").append((i <= 1) ? " " : "^" + i + " ");
             }
 
         }
 
-        return out;
+        return out.toString();
     }
 
     public double evaluate(double x) {

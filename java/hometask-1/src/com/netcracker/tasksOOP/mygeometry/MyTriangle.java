@@ -33,13 +33,11 @@ public class MyTriangle {
     public String getType() {
         String type;
         if (v1.distance(v2) == v2.distance(v3) && v2.distance(v3) == v3.distance(v1) && v3.distance(v1) == v1.distance(v2)) {
-            type = "equilateral";
+            return "equilateral";
         } else if (v1.distance(v2) == v2.distance(v3) || v2.distance(v3) == v3.distance(v1) || v3.distance(v1) == v1.distance(v2)) {
-            type = "isosceles";
+            return "isosceles";
         } else {
-            type = "scalene";
+            return "scalene";
         }
-
-        return type;
     }
 }
