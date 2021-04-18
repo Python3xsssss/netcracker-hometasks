@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>I am GROOOT!</title>
+    <meta name="author" content="Mikhail Gerasimov">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <h1> AVL Tree Visualisation </h1>
+
+    <div class="content">
+        <div id="parent">
+            <canvas id='treeWindow' width="100%" height="100%"></canvas>
+        </div>
+        
+        <div class="blocks">
+            <div class="addBlock">
+                <h2> Add a node </h2>
+                <div class="inp">
+                    <span> Data: <input type="text" name="addData" id="addData" value="" size="4" maxlength="10"/> </span>
+                    <span> Key: <input type="number" name="addKey" id="addKey" value="" size="4"/> </span>
+                </div>
+                <input type="button" name="add" id="add" value="Add" />
+            </div>
+    
+            <div class="addBlock">
+                <h2> Find a node </h2>
+                <div class="inp">
+                    <span> Key: <input type="number" name="findKey" id="findKey" value="" size="4"/> </span>
+                </div>
+                <input type="button" name="find" id="find" value="Find" />
+            </div>
+
+            <div class="addBlock">
+                <h2> Delete a node </h2>
+                <div class="inp">
+                    <span> Key: <input type="number" name="delKey" id="delKey" value="" size="4"/> </span>
+                </div>
+                <input type="button" name="del" id="del" value="Delete" />
+            </div>
+        </div>
+        
+    
+        
+    </div>
+    
+
+    <script type="text/javascript" src="build/index.js"></script>
+</body>
+</html>
