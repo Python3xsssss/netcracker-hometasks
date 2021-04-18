@@ -101,7 +101,7 @@ var AVLTree = /** @class */ (function () {
         var marginTop = 40;
         var x = canv.width / 2;
         var y = marginTop + AVLTree.radius;
-        var width = Math.pow(2, this.top.height) * (2 * AVLTree.radius + AVLTree.interval) - AVLTree.interval;
+        var width = Math.pow(2, this.top.height) * (2 * AVLTree.radius + AVLTree.intervalW) - AVLTree.intervalW;
         while (subtree != null) {
             if (key < subtree.key) {
                 subtree = subtree.left;
@@ -114,7 +114,7 @@ var AVLTree = /** @class */ (function () {
             else {
                 break;
             }
-            y += 2 * AVLTree.radius + AVLTree.interval;
+            y += 2 * AVLTree.radius + AVLTree.intervalH;
             width /= 2;
         }
         if (subtree != null && context != null) {
@@ -167,7 +167,7 @@ var AVLTree = /** @class */ (function () {
     AVLTree.prototype.drawEdge = function (context, x, y, width, color, left) {
         var shift = AVLTree.radius / Math.sqrt(2);
         var nextX = (left) ? x - width / 4 : x + width / 4;
-        var nextY = y + 2 * AVLTree.radius + AVLTree.interval;
+        var nextY = y + 2 * AVLTree.radius + AVLTree.intervalH;
         context.strokeStyle = color;
         context.moveTo((left) ? x - shift : x + shift, y + shift);
         context.lineTo((left) ? nextX + shift : nextX - shift, nextY - shift);
@@ -188,11 +188,11 @@ var AVLTree = /** @class */ (function () {
         context.fillText(String(subtree.key), x, y - AVLTree.radius);
         if (subtree.left != null) {
             this.drawEdge(context, x, y, width, "white", true);
-            this.bfsRedraw(subtree.left, context, x - width / 4, y + 2 * AVLTree.radius + AVLTree.interval, width / 2);
+            this.bfsRedraw(subtree.left, context, x - width / 4, y + 2 * AVLTree.radius + AVLTree.intervalH, width / 2);
         }
         if (subtree.right != null) {
             this.drawEdge(context, x, y, width, "white", false);
-            this.bfsRedraw(subtree.right, context, x + width / 4, y + 2 * AVLTree.radius + AVLTree.interval, width / 2);
+            this.bfsRedraw(subtree.right, context, x + width / 4, y + 2 * AVLTree.radius + AVLTree.intervalH, width / 2);
         }
         return;
     };
@@ -232,12 +232,13 @@ var AVLTree = /** @class */ (function () {
         context.textAlign = "center";
         context.fillStyle = "white";
         var marginTop = 40;
-        var width = Math.pow(2, this.top.height) * (2 * AVLTree.radius + AVLTree.interval) - AVLTree.interval;
+        var width = Math.pow(2, this.top.height) * (2 * AVLTree.radius + AVLTree.intervalW) - AVLTree.intervalW;
         this.bfsRedraw(this.top, context, canv.width / 2, AVLTree.radius + marginTop, width);
     };
     AVLTree.radius = 30;
     AVLTree.maxlen = 2 * AVLTree.radius - 5;
-    AVLTree.interval = 1.5 * AVLTree.radius;
+    AVLTree.intervalW = 0.1 * AVLTree.radius;
+    AVLTree.intervalH = 1.1 * AVLTree.radius;
     return AVLTree;
 }());
 function resizeCanv(canvas) {

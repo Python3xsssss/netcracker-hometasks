@@ -20,7 +20,8 @@ class AVLNode<T> {
 class AVLTree<T> {
     private static radius = 30;
     private static maxlen = 2 * AVLTree.radius - 5;
-    private static interval = 1.5 * AVLTree.radius;
+    private static intervalW = 0.1 * AVLTree.radius;
+    private static intervalH = 1.1 * AVLTree.radius;
     private top: AVLNodeOrNull<T>;
 
 
@@ -136,7 +137,7 @@ class AVLTree<T> {
         const marginTop = 40;
         let x = canv.width / 2;
         let y = marginTop + AVLTree.radius;
-        let width = Math.pow(2, this.top.height) * (2 * AVLTree.radius + AVLTree.interval) - AVLTree.interval;
+        let width = Math.pow(2, this.top.height) * (2 * AVLTree.radius + AVLTree.intervalW) - AVLTree.intervalW;
         while (subtree != null) {
             if (key < subtree.key) {
                 subtree = subtree.left;
@@ -147,7 +148,7 @@ class AVLTree<T> {
             } else {
                 break;
             }
-            y += 2 * AVLTree.radius + AVLTree.interval;
+            y += 2 * AVLTree.radius + AVLTree.intervalH;
             width /= 2;
         }
         if (subtree != null && context != null) {
@@ -210,7 +211,7 @@ class AVLTree<T> {
     private drawEdge(context: CanvasRenderingContext2D, x: number, y: number, width: number, color: string, left: boolean): void {
         const shift = AVLTree.radius / Math.sqrt(2);
         const nextX = (left) ? x - width / 4 : x + width / 4;
-        const nextY = y + 2 * AVLTree.radius + AVLTree.interval;
+        const nextY = y + 2 * AVLTree.radius + AVLTree.intervalH;
         context.strokeStyle = color;
         context.moveTo((left) ? x - shift : x + shift, y + shift);
         context.lineTo((left) ? nextX + shift : nextX - shift, nextY - shift);
@@ -233,11 +234,11 @@ class AVLTree<T> {
 
         if (subtree.left != null) {
             this.drawEdge(context, x, y, width, "white", true);
-            this.bfsRedraw(subtree.left, context, x - width / 4, y + 2 * AVLTree.radius + AVLTree.interval, width / 2);
+            this.bfsRedraw(subtree.left, context, x - width / 4, y + 2 * AVLTree.radius + AVLTree.intervalH, width / 2);
         }
         if (subtree.right != null) {
             this.drawEdge(context, x, y, width, "white", false);
-            this.bfsRedraw(subtree.right, context, x + width / 4, y + 2 * AVLTree.radius + AVLTree.interval, width / 2);
+            this.bfsRedraw(subtree.right, context, x + width / 4, y + 2 * AVLTree.radius + AVLTree.intervalH, width / 2);
         }
 
         return;
@@ -287,7 +288,7 @@ class AVLTree<T> {
         context.fillStyle = "white";
 
         const marginTop = 40;
-        const width = Math.pow(2, this.top.height) * (2 * AVLTree.radius + AVLTree.interval) - AVLTree.interval;
+        const width = Math.pow(2, this.top.height) * (2 * AVLTree.radius + AVLTree.intervalW) - AVLTree.intervalW;
         this.bfsRedraw(this.top, context, canv.width / 2, AVLTree.radius + marginTop, width);
     }
 }
