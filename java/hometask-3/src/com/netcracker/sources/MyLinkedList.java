@@ -1,6 +1,10 @@
 package com.netcracker.sources;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.NoSuchElementException;
 
 class Node<E> {
     E element;
@@ -24,10 +28,10 @@ public class MyLinkedList<E> implements ILinkedList<E> {
     private int size = 0;
 
 
-    MyLinkedList() {
+    public MyLinkedList() {
     }
 
-    MyLinkedList(MyLinkedList<E> another) {
+    public MyLinkedList(MyLinkedList<E> another) {
         this.size = another.size;
         this.head = null;
         Node<E> inputNode = another.head;
@@ -73,7 +77,7 @@ public class MyLinkedList<E> implements ILinkedList<E> {
 
     @Override
     public void add(int index, E element) {
-        if (index < 0 || index >= this.size) {
+        if (index < 0 || index > this.size) {
             throw new IllegalArgumentException("Invalid list index");
         }
 
@@ -81,7 +85,10 @@ public class MyLinkedList<E> implements ILinkedList<E> {
             this.pushHead(element);
             return;
         }
-
+        if (index == size) {
+            this.add(element);
+            return;
+        }
 
         Node<E> currNode = head;
         for (int i = 0; i != index - 1; i++) {
@@ -133,7 +140,7 @@ public class MyLinkedList<E> implements ILinkedList<E> {
             i++;
         }
 
-        return (currNode == null) ? i : -1;
+        return (currNode != null) ? i : -1;
     }
 
     public E popHead() {
@@ -199,13 +206,60 @@ public class MyLinkedList<E> implements ILinkedList<E> {
     }
 
     @Override
-    public E[] toArray() {
-        // a kak
-        return null;
+    @SuppressWarnings("unchecked")
+    public <T> T[] toArray(T[] arr) {
+        if (arr.length < size)
+            arr = (T[])java.lang.reflect.Array.newInstance(
+                    arr.getClass().getComponentType(), size);
+
+        int i = 0;
+        Object[] result = arr;
+        for (Node<E> currNode = head; currNode != null; currNode = currNode.nextNode)
+            result[i++] = currNode.element;
+
+        if (arr.length > size)
+            arr[size] = null;
+
+        return arr;
+    }
+
+    @Override
+    public String toString() {
+        Node<E> currNode = head;
+        StringBuilder out = new StringBuilder("[");
+        for (int i = 0; i < size; i++) {
+            if (i != 0) {
+                out.append(" -> ");
+            }
+            out.append(currNode.element.toString());
+            currNode = currNode.nextNode;
+        }
+        out.append(']');
+
+        return out.toString();
     }
 
     @Override
     public Iterator<E> iterator() {
-        return null;
+        MyLinkedList<E> myList = this;
+        return new Iterator<>() {
+
+            private Node<E> curNode = head;
+
+            @Override
+            public boolean hasNext() {
+                return curNode != null;
+            }
+
+            @Override
+            public E next() throws NoSuchElementException {
+                if (!hasNext())
+                    throw new NoSuchElementException();
+
+                E element = curNode.element;
+                curNode = curNode.nextNode;
+                return element;
+            }
+        };
     }
 }
